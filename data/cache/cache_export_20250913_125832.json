@@ -1,0 +1,41 @@
+{
+  "export_time": "2025-09-13T12:58:32.791098",
+  "earnings_events": [
+    {
+      "symbol": "MSFT",
+      "company_name": "Microsoft Corp.",
+      "earnings_date": "2024-01-24",
+      "earnings_time": "AMC",
+      "quarter": "Q2 2024",
+      "fiscal_year": 2024,
+      "eps_estimate": 11.05,
+      "eps_actual": null,
+      "revenue_estimate": 60000000000.0,
+      "revenue_actual": null,
+      "beat_estimate": null,
+      "last_updated": "2025-09-13T12:58:32.790009",
+      "data_source": "manual_input"
+    },
+    {
+      "symbol": "AAPL",
+      "company_name": "Apple Inc.",
+      "earnings_date": "2024-01-25",
+      "earnings_time": "AMC",
+      "quarter": "Q1 2024",
+      "fiscal_year": 2024,
+      "eps_estimate": 2.1,
+      "eps_actual": 2.18,
+      "revenue_estimate": 117500000000.0,
+      "revenue_actual": 119575000000.0,
+      "beat_estimate": true,
+      "last_updated": "2025-09-13T12:58:32.790009",
+      "data_source": "manual_input"
+    }
+  ],
+  "cache_stats": {
+    "earnings_events": 2,
+    "analyst_data": 1,
+    "last_earnings_update": "2025-09-13T12:58:32.790009",
+    "last_analyst_update": "2025-09-13T12:58:32.790362"
+  }
+}

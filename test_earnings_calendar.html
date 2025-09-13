@@ -1,0 +1,202 @@
+
+        <!DOCTYPE html>
+        <html lang="zh-CN">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>财报日历 - 2025年9月</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+                .calendar-container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                .calendar-header { text-align: center; margin-bottom: 30px; }
+                .calendar-title { font-size: 2em; color: #333; margin-bottom: 10px; }
+                .calendar-nav { margin: 20px 0; }
+                .nav-btn { padding: 10px 20px; margin: 0 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+                .nav-btn:hover { background: #0056b3; }
+                .calendar-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+                .calendar-table th, .calendar-table td { border: 1px solid #ddd; padding: 8px; vertical-align: top; height: 120px; }
+                .calendar-table th { background: #f8f9fa; text-align: center; font-weight: bold; height: 40px; }
+                .day-number { font-weight: bold; font-size: 1.1em; margin-bottom: 5px; }
+                .earnings-event { 
+                    background: linear-gradient(135deg, #4CAF50, #45a049); 
+                    color: white; 
+                    padding: 2px 4px; 
+                    margin: 1px 0; 
+                    border-radius: 3px; 
+                    font-size: 0.8em; 
+                    cursor: pointer;
+                    transition: transform 0.2s;
+                }
+                .earnings-event:hover { transform: scale(1.05); background: linear-gradient(135deg, #45a049, #4CAF50); }
+                .today { background: #e3f2fd; }
+                .other-month { color: #ccc; background: #f8f8f8; }
+                .modal { 
+                    display: none; 
+                    position: fixed; 
+                    z-index: 1000; 
+                    left: 0; 
+                    top: 0; 
+                    width: 100%; 
+                    height: 100%; 
+                    background: rgba(0,0,0,0.5); 
+                }
+                .modal-content { 
+                    background: white; 
+                    margin: 5% auto; 
+                    padding: 20px; 
+                    border-radius: 8px; 
+                    width: 80%; 
+                    max-width: 800px; 
+                    max-height: 80vh; 
+                    overflow-y: auto; 
+                }
+                .close { 
+                    color: #aaa; 
+                    float: right; 
+                    font-size: 28px; 
+                    font-weight: bold; 
+                    cursor: pointer; 
+                }
+                .close:hover { color: black; }
+                .event-details { margin: 20px 0; }
+                .analyst-comments { margin-top: 30px; }
+                .comment-item { 
+                    border: 1px solid #eee; 
+                    padding: 15px; 
+                    margin: 10px 0; 
+                    border-radius: 5px; 
+                    background: #f9f9f9; 
+                }
+                .comment-header { font-weight: bold; color: #333; margin-bottom: 8px; }
+                .comment-meta { color: #666; font-size: 0.9em; margin-bottom: 8px; }
+                .loading { text-align: center; padding: 20px; color: #666; }
+            </style>
+        </head>
+        <body>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h1 class="calendar-title">财报日历</h1>
+                    <div class="calendar-nav">
+                        <button class="nav-btn" onclick="changeMonth(-1)">← 上月</button>
+                        <span style="margin: 0 20px; font-size: 1.2em; font-weight: bold;">2025年9月</span>
+                        <button class="nav-btn" onclick="changeMonth(1)">下月 →</button>
+                    </div>
+                </div>
+                
+                <table class="calendar-table">
+                    <tr>
+                        <th>周日</th><th>周一</th><th>周二</th><th>周三</th><th>周四</th><th>周五</th><th>周六</th>
+                    </tr>
+        <tr><td class="other-month"></td><td class=""><div class="day-number">1</div></td><td class=""><div class="day-number">2</div></td><td class=""><div class="day-number">3</div></td><td class=""><div class="day-number">4</div></td><td class=""><div class="day-number">5</div></td><td class=""><div class="day-number">6</div></td></tr><tr><td class=""><div class="day-number">7</div></td><td class=""><div class="day-number">8</div></td><td class=""><div class="day-number">9</div></td><td class=""><div class="day-number">10</div></td><td class=""><div class="day-number">11</div></td><td class=""><div class="day-number">12</div></td><td class="today"><div class="day-number">13</div></td></tr><tr><td class=""><div class="day-number">14</div></td><td class=""><div class="day-number">15</div></td><td class=""><div class="day-number">16</div></td><td class=""><div class="day-number">17</div></td><td class=""><div class="day-number">18</div></td><td class=""><div class="day-number">19</div></td><td class=""><div class="day-number">20</div></td></tr><tr><td class=""><div class="day-number">21</div></td><td class=""><div class="day-number">22</div></td><td class=""><div class="day-number">23</div></td><td class=""><div class="day-number">24</div></td><td class=""><div class="day-number">25</div></td><td class=""><div class="day-number">26</div></td><td class=""><div class="day-number">27</div></td></tr><tr><td class=""><div class="day-number">28</div></td><td class=""><div class="day-number">29</div></td><td class=""><div class="day-number">30</div></td><td class="other-month"></td><td class="other-month"></td><td class="other-month"></td><td class="other-month"></td></tr>
+                </table>
+            </div>
+            
+            <!-- 模态框 -->
+            <div id="eventModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div id="modalContent">
+                        <div class="loading">加载中...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                let currentYear = 2025;
+                let currentMonth = 9;
+                
+                function changeMonth(delta) {
+                    currentMonth += delta;
+                    if (currentMonth > 12) {
+                        currentMonth = 1;
+                        currentYear++;
+                    } else if (currentMonth < 1) {
+                        currentMonth = 12;
+                        currentYear--;
+                    }
+                    
+                    // 重新加载页面
+                    window.location.href = `?year=${currentYear}&month=${currentMonth}`;
+                }
+                
+                function showEventDetails(symbol, date) {
+                    const modal = document.getElementById('eventModal');
+                    const content = document.getElementById('modalContent');
+                    
+                    modal.style.display = 'block';
+                    content.innerHTML = '<div class="loading">正在加载财报详情和分析师评论...</div>';
+                    
+                    // 模拟加载财报详情（实际应该调用后端API）
+                    fetch(`/api/earnings_details?symbol=${symbol}&date=${date}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            displayEventDetails(data);
+                        })
+                        .catch(error => {
+                            content.innerHTML = '<p>加载失败，请稍后重试。</p>';
+                        });
+                }
+                
+                function displayEventDetails(data) {
+                    const content = document.getElementById('modalContent');
+                    let html = `
+                        <h2>${data.symbol} - ${data.company_name}</h2>
+                        <div class="event-details">
+                            <p><strong>财报日期:</strong> ${data.earnings_date}</p>
+                            <p><strong>季度:</strong> ${data.quarter}</p>
+                            <p><strong>财政年度:</strong> ${data.fiscal_year}</p>
+                    `;
+                    
+                    if (data.estimated_eps) {
+                        html += `<p><strong>预期EPS:</strong> $${data.estimated_eps.toFixed(2)}</p>`;
+                    }
+                    if (data.actual_eps) {
+                        html += `<p><strong>实际EPS:</strong> $${data.actual_eps.toFixed(2)}</p>`;
+                    }
+                    if (data.estimated_revenue) {
+                        html += `<p><strong>预期营收:</strong> $${(data.estimated_revenue/1000000).toFixed(0)}M</p>`;
+                    }
+                    if (data.actual_revenue) {
+                        html += `<p><strong>实际营收:</strong> $${(data.actual_revenue/1000000).toFixed(0)}M</p>`;
+                    }
+                    
+                    html += '</div>';
+                    
+                    // 添加分析师评论
+                    if (data.analyst_comments && data.analyst_comments.length > 0) {
+                        html += '<div class="analyst-comments"><h3>分析师评论</h3>';
+                        data.analyst_comments.forEach(comment => {
+                            html += `
+                                <div class="comment-item">
+                                    <div class="comment-header">${comment.analyst_name} - ${comment.firm}</div>
+                                    <div class="comment-meta">
+                                        评级: ${comment.rating} | 
+                                        ${comment.price_target ? '目标价: $' + comment.price_target.toFixed(2) + ' | ' : ''}
+                                        日期: ${comment.publish_date} | 
+                                        来源: ${comment.source}
+                                    </div>
+                                    <div class="comment-text">${comment.comment}</div>
+                                </div>
+                            `;
+                        });
+                        html += '</div>';
+                    }
+                    
+                    content.innerHTML = html;
+                }
+                
+                function closeModal() {
+                    document.getElementById('eventModal').style.display = 'none';
+                }
+                
+                // 点击模态框外部关闭
+                window.onclick = function(event) {
+                    const modal = document.getElementById('eventModal');
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                    }
+                }
+            </script>
+        </body>
+        </html>
+        

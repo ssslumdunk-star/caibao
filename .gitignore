@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+auto_update.log
+smart_data_fetcher.log
+auto_updater.log
+maintenance_cron.log
+auto_update_cron.log
+
+# Database
+earnings_cache.db
+*.db
+
+# Backup files
+*.tar.gz
+*.zip
+
+# Runtime files
+*.pid
+auto_updater.pid
+
+# Cache and temporary files
+*.cache
+.DS_Store
+Thumbs.db
+
+# Reports (keep templates, ignore generated)
+price_validation_report_*.json
+update_history.json
+maintenance_report.json
+
+# Generated scripts (will be created by setup)
+start_auto_updater.sh
+stop_auto_updater.sh
+check_update_status.sh
+manual_update.sh
+crontab_entries.txt
+crontab_backup_*.txt
